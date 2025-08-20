@@ -21,6 +21,5 @@ repositories {
 
 dependencies {
     implementation platform("org.apache.grails:grails-bom:$grailsVersion")
-    implementation "org.asciidoctor.jvm.convert:org.asciidoctor.jvm.convert.gradle.plugin:$asciidoctorGradlePluginVersion"
     implementation 'org.apache.grails:grails-gradle-plugins'
 }

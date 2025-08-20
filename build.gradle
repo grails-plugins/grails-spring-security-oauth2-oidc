@@ -1,3 +1,7 @@
+import java.time.Instant
+import java.time.ZoneOffset
+import java.time.format.DateTimeFormatter
+
 buildscript {
     repositories {
         mavenCentral()
@@ -14,13 +18,31 @@ buildscript {
         classpath "org.apache.grails:grails-gradle-plugins"
     }
 }
+apply plugin: 'groovy'
+apply plugin: 'java-library'
+apply plugin: 'org.apache.grails.gradle.grails-plugin'
+apply plugin: 'org.apache.grails.gradle.grails-publish'
 
-version "0.1"
-group "grails.spring.security.oauth.oidc"
+group "org.grails.plugins"
 
-apply plugin:"eclipse"
-apply plugin:"idea"
-apply plugin:"org.apache.grails.gradle.grails-plugin"
+ext {
+    buildInstant = java.util.Optional.ofNullable(System.getenv("SOURCE_DATE_EPOCH"))
+            .filter(s -> !s.isEmpty())
+            .map(Long::parseLong)
+            .map(Instant::ofEpochSecond)
+            .orElseGet(Instant::now)
+    formattedBuildDate = DateTimeFormatter.ISO_INSTANT.format(buildInstant)
+    buildDate = (buildInstant as Instant).atZone(ZoneOffset.UTC) // for reproducible builds
+
+    publishArtifactId = 'grails-spring-security-oauth2-oidc'
+    pomTitle = 'Grails Spring Security OAuth2 OIDC Provider Plugin'
+    pomDescription = 'This plugin provides the oauth2 OIDC provider for grails-spring-security-oauth2 plugin.'
+    pomDevelopers = [
+            sbglasius: 'Søren Berg Glasius',
+    ]
+    
+}
+
 
 repositories {
     mavenCentral()
@@ -35,23 +57,34 @@ repositories {
 
 dependencies {
     implementation platform("org.apache.grails:grails-bom:$grailsVersion")
-    developmentOnly "org.springframework.boot:spring-boot-devtools" // Spring Boot DevTools may cause performance slowdowns or compatibility issues on larger applications
-    integrationTestImplementation testFixtures("org.apache.grails:grails-geb")
-    console "org.apache.grails:grails-console"
-    implementation "org.springframework.boot:spring-boot-starter-logging"
-    implementation "org.springframework.boot:spring-boot-starter-validation"
-    implementation "org.springframework.boot:spring-boot-autoconfigure"
-    implementation "org.springframework.boot:spring-boot-starter"
-    implementation "org.apache.grails:grails-core"
-    implementation "org.apache.grails:grails-i18n"
+    compileOnly "org.springframework.boot:spring-boot-starter-logging"
+    compileOnly "org.springframework.boot:spring-boot-starter-validation"
+    compileOnly "org.springframework.boot:spring-boot-autoconfigure"
+    compileOnly "org.springframework.boot:spring-boot-starter"
+    compileOnly "org.apache.grails:grails-core"
     profile "org.apache.grails.profiles:plugin"
     runtimeOnly "org.fusesource.jansi:jansi"
-    testImplementation "org.apache.grails:grails-testing-support-datamapping"
-    testImplementation "org.spockframework:spock-core"
+
+    implementation 'org.apache.grails:grails-spring-security:7.0.0-M5'
+    implementation 'org.apache.grails:grails-spring-security-oauth2:7.0.0-M5'
+    implementation 'com.auth0:java-jwt:4.5.0'
+    implementation 'com.auth0:jwks-rsa:0.23.0'
 }
 
-compileJava.options.release = 17
+grailsPublish {
+    githubSlug = 'grails-plugins/grails-spring-security-oauth2-oidc'
+    license {
+        name = 'Apache-2.0'
+    }
+    title = pomTitle
+    desc = pomDescription
+    developers = pomDevelopers
+}
+
+
+compileJava.options.release = javaVersion.toInteger()
 
 tasks.withType(Test) {
     useJUnitPlatform()
 }
+

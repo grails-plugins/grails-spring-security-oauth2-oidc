@@ -1,7 +1,7 @@
 grails:
     profile: plugin
     codegen:
-        defaultPackage: grails.spring.security.oauth.oidc
+        defaultPackage: grails.springsecurity.oauth2.oidc
     gorm:
         reactor:
             # Whether to translate GORM events into Reactor events
@@ -20,15 +20,6 @@ spring:
     groovy:
         template:
             check-template-location: false
-    devtools:
-        restart:
-            additional-exclude:
-                - '*.gsp'
-                - '**/*.gsp'
-                - '*.gson'
-                - '**/*.gson'
-                - 'logback-spring.xml'
-                - '*.properties'
 environments:
     development:
         management:

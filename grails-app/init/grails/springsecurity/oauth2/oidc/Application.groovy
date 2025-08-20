@@ -1,4 +1,4 @@
-package grails.spring.security.oauth.oidc
+package grails.springsecurity.oauth2.oidc
 
 import grails.boot.*
 import grails.boot.config.GrailsAutoConfiguration

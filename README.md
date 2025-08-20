@@ -1,8 +1,8 @@
 Spring Security OAuth2 OIDC Plugin
 ====================================
-[ ![Download](https://api.bintray.com/packages/grails/plugins/spring-security-oauth2-google/images/download.svg) ](https://bintray.com/grails/plugins/spring-security-oauth2-google/_latestVersion)
+[ ![Download](https://api.bintray.com/packages/grails/plugins/spring-security-oauth2-oidc/images/download.svg) ](https://bintray.com/grails/plugins/spring-security-oauth2-google/_latestVersion)
 
-Add aa OIDC OAuth2 provider to the [Spring Security OAuth2 Plugin](https://github.com/apache/grails-/grails-spring-security-oauth2).
+Add aa OIDC OAuth2 provider to the [Spring Security OAuth2 Plugin](https://github.com/apache/grails/grails-spring-security-oauth2).
 
 Installation
 ------------
@@ -19,7 +19,7 @@ dependencies {
 Usage
 -----
 Add this to your application.yml
-```
+```yaml
 grails:
     plugin:
         springsecurity:
@@ -28,20 +28,20 @@ grails:
                     oidc:
                         api_key: 'oidc-api-key'               #needed
                         api_secret: 'oidc-api-secret'         #needed
-                        successUri: "/oauth2/google/success"    #optional
-                        failureUri: "/oauth2/google/failure"    #optional
-                        callback: "/oauth2/google/callback"     #optional
-                        scopes: "some_scope"                    #optional, see https://developers.google.com/identity/protocols/googlescopes#monitoringv3
+                        successUri: "/oauth2/oidc/success"    #optional
+                        failureUri: "/oauth2/oidc/failure"    #optional
+                        callback: "/oauth2/oidc/callback"     #optional
+                        scopes: "some_scope"                  #optional (Default: openid profile email)
 ```
 You can replace the URIs with your own controller implementation.
 
 In your view you can use the taglib exposed from this plugin and from OAuth plugin to create links and to know if the user is authenticated with a given provider:
-```xml
-<oauth2:connect provider="google" id="google-connect-link">Google</oauth2:connect>
+```html
+<oauth2:connect provider="oidc" id="oidc-connect-link">OIDC Provider</oauth2:connect>
 
-Logged with google?
-<oauth2:ifLoggedInWith provider="google">yes</oauth2:ifLoggedInWith>
-<oauth2:ifNotLoggedInWith provider="google">no</oauth2:ifNotLoggedInWith>
+Logged with OIDC?
+<oauth2:ifLoggedInWith provider="oidc">yes</oauth2:ifLoggedInWith>
+<oauth2:ifNotLoggedInWith provider="oidc">no</oauth2:ifNotLoggedInWith>
 ```
 License
 -------

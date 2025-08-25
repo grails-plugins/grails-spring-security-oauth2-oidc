@@ -1,11 +1,11 @@
-Spring Security OAuth2 OIDC Plugin
-====================================
-[ ![Download](https://api.bintray.com/packages/grails/plugins/spring-security-oauth2-oidc/images/download.svg) ](https://bintray.com/grails/plugins/spring-security-oauth2-google/_latestVersion)
+# Spring Security OAuth2 OIDC Plugin
+
+[![Java CI](https://github.com/grails-plugins/grails-spring-security-oauth2-oidc/actions/workflows/gradle.yml/badge.svg)](https://github.com/grails-plugins/grails-spring-security-oauth2-oidc/actions/workflows/gradle.yml) [![Release](https://github.com/grails-plugins/grails-spring-security-oauth2-oidc/actions/workflows/release.yml/badge.svg?event=release)](https://github.com/grails-plugins/grails-spring-security-oauth2-oidc/actions/workflows/release.yml)
 
 Add aa OIDC OAuth2 provider to the [Spring Security OAuth2 Plugin](https://github.com/apache/grails/grails-spring-security-oauth2).
 
-Installation
-------------
+## Installation
+
 Add the following dependencies in `build.gradle`
 ```
 dependencies {
@@ -16,8 +16,8 @@ dependencies {
 }
 ```
 
-Usage
------
+## Usage
+
 Add this to your application.yml
 ```yaml
 grails:
@@ -43,6 +43,13 @@ Logged with OIDC?
 <oauth2:ifLoggedInWith provider="oidc">yes</oauth2:ifLoggedInWith>
 <oauth2:ifNotLoggedInWith provider="oidc">no</oauth2:ifNotLoggedInWith>
 ```
-License
--------
+
+## Versions
+
+| Branch | Grails Version |
+|--------|----------------|
+| 1.0.x  | 7.x            |
+
+
+## License
 Apache 2

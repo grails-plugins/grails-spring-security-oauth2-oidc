@@ -6,7 +6,6 @@ env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   JAVA_VERSION: '17.0.15' # this must be a specific version for reproducible builds
   RELEASE_TAG_PREFIX: 'v'
-  DOCUMENTATION: 'false'
 jobs:
   publish:
     permissions:
@@ -118,16 +117,3 @@ jobs:
           ./gradlew
           findSonatypeStagingRepository
           releaseSonatypeStagingRepository
-      - name: "📖 Generate Documentation"
-        if: ${{ env.DOCUMENTATION != 'false' }}
-        run: ./gradlew docs
-      - name: "📤 Publish Documentation to Github Pages"
-        if: ${{ env.DOCUMENTATION != 'false' }}
-        uses: apache/grails-github-actions/deploy-github-pages@asf
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GRADLE_PUBLISH_RELEASE: 'true'
-          SOURCE_FOLDER: build/docs
-          VERSION: ${{ needs.publish.outputs.release_version }}
-      - name: "⚙️ Run post-release"
-        uses: apache/grails-github-actions/post-release@asf

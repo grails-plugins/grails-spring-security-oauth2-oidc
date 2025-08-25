@@ -1,6 +1,6 @@
 # Spring Security OAuth2 OIDC Plugin
 
-[![Java CI](https://github.com/grails-plugins/grails-spring-security-oauth2-oidc/actions/workflows/gradle.yml/badge.svg?branch=1.0.x)](https://github.com/grails-plugins/grails-spring-security-oauth2-oidc/actions/workflows/gradle.yml) [![Release](https://github.com/grails-plugins/grails-spring-security-oauth2-oidc/actions/workflows/release.yml/badge.svg?branch=1.0.x&event=release)](https://github.com/grails-plugins/grails-spring-security-oauth2-oidc/actions/workflows/release.yml)
+[![Java CI](https://github.com/grails-plugins/grails-spring-security-oauth2-oidc/actions/workflows/gradle.yml/badge.svg?branch=1.0.x)](https://github.com/grails-plugins/grails-spring-security-oauth2-oidc/actions/workflows/gradle.yml) 
 
 Add aa OIDC OAuth2 provider to the [Spring Security OAuth2 Plugin](https://github.com/apache/grails/grails-spring-security-oauth2).
 
